@@ -1,9 +1,12 @@
-import Header from "./Components/Home/Header";
+import HomePage from "./Components/Home/HomePage";
+import { SbProvider } from "./Context/SidebarContext";
 
 function App() {
   return (
     <>
-      <Header />
+      <SbProvider>
+        <HomePage />
+      </SbProvider>
     </>
   );
 }
