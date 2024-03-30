@@ -1,4 +1,4 @@
-import HomePage from "./Components/Home/HomePage";
+import { HomePage } from "./Components/Home/HomePage";
 import { SbProvider } from "./Context/SidebarContext";
 
 function App() {

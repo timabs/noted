@@ -1,11 +1,11 @@
 import { createContext, useState } from "react";
 
-interface sidebar {
+interface SidebarState {
   sbOpen: boolean;
   setSbOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const SidebarContext = createContext<sidebar>({
+export const SidebarContext = createContext<SidebarState>({
   sbOpen: false,
   setSbOpen: () => {},
 });
