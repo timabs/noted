@@ -1,12 +1,15 @@
 import { HomePage } from "./Components/Home/HomePage";
+import { NoteProvider } from "./Context/NotesContext";
 import { SbProvider } from "./Context/SidebarContext";
 
 function App() {
   return (
     <>
-      <SbProvider>
-        <HomePage />
-      </SbProvider>
+      <NoteProvider>
+        <SbProvider>
+          <HomePage />
+        </SbProvider>
+      </NoteProvider>
     </>
   );
 }
