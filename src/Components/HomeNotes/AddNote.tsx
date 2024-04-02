@@ -1,4 +1,4 @@
-import { FC, FormEvent, useContext, useState } from "react";
+import { FC, FormEvent, useContext, useRef, useState } from "react";
 import { NoteContext } from "../../Context/NotesContext";
 import { INote, NoteContextType } from "../../@types/note";
 
@@ -6,6 +6,8 @@ export const AddNote: FC = () => {
   const [newOpen, setNewOpen] = useState<boolean>(false);
   const { saveNote } = useContext(NoteContext) as NoteContextType;
   const [formData, setFormData] = useState<INote | {}>();
+  const titleRef = useRef<HTMLInputElement>(null);
+  const contentRef = useRef<HTMLTextAreaElement>(null);
 
   const handleChange = (
     e: FormEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -21,6 +23,8 @@ export const AddNote: FC = () => {
     saveNote(formData);
     setNewOpen(false);
     setFormData({});
+    titleRef.current!.value = "";
+    contentRef.current!.value = "";
   };
   return (
     <div className="w-full flex px-8 h-fit flex-col items-end gap-4">
@@ -38,7 +42,7 @@ export const AddNote: FC = () => {
         onSubmit={(e) => handleSubmit(e, formData)}
       >
         <label
-          htmlFor="note-title"
+          htmlFor="title"
           className="flex border-b-2 border-gray-400 h-3/12"
         >
           <input
@@ -47,6 +51,7 @@ export const AddNote: FC = () => {
             id="title"
             placeholder="New Note"
             onChange={handleChange}
+            ref={titleRef}
           ></input>
         </label>
         <label htmlFor="content" className="h-4/6">
@@ -54,6 +59,7 @@ export const AddNote: FC = () => {
             className="h-full overflow-y-auto p-2 resize-none"
             id="content"
             onChange={handleChange}
+            ref={contentRef}
           ></textarea>
         </label>
         <button
