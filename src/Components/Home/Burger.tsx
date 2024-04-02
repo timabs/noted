@@ -10,7 +10,7 @@ export default function BurgerMenu() {
   };
   return (
     <div
-      className="w-10 flex flex-col gap-2 hover:cursor-pointer z-20 ml-8 mt-8 absolute"
+      className="w-10 flex flex-col gap-2 hover:cursor-pointer z-20 ml-6 mt-8 absolute xl:ml-8"
       onClick={() => handleClick()}
     >
       {/* lines */}
