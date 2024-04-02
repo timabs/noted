@@ -5,8 +5,8 @@ import Sidebar from "./Sidebar";
 
 export const HomePage: FC = () => {
   return (
-    <div className="flex flex-col h-screen">
-      <div className="flex flex-row h-1/6">
+    <div className="flex flex-col h-screen xl:items-center">
+      <div className="flex flex-row h-1/6 xl:w-full">
         <Sidebar />
         <Header />
       </div>

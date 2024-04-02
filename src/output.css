@@ -641,6 +641,10 @@ video {
   align-items: center;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .gap-2 {
   gap: 0.5rem;
 }
@@ -763,7 +767,23 @@ video {
     width: 33.333333%;
   }
 
+  .xl\:w-1\/2 {
+    width: 50%;
+  }
+
+  .xl\:w-full {
+    width: 100%;
+  }
+
+  .xl\:w-1\/4 {
+    width: 25%;
+  }
+
   .xl\:items-start {
     align-items: flex-start;
+  }
+
+  .xl\:items-center {
+    align-items: center;
   }
 }
