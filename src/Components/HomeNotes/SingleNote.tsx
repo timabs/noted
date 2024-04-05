@@ -9,7 +9,7 @@ interface OneNoteProps {
 export const Note: FC<OneNoteProps> = ({ note, i }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const contentRef = useRef<HTMLParagraphElement>(null);
-  const handleEdit = (id: number) => {
+  const handleEdit = () => {
     setEditMode(!editMode);
   };
   useEffect(() => {
@@ -21,7 +21,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
   }, [editMode]);
   return (
     <div
-      className={`border-2 border-black rounded-md p-2 w-full xl:w-1/3 flex flex-col min-h-48 justify-between h-1/3 max-h-52`}
+      className={`font-helv border-2 border-black rounded-md p-2 w-full xl:w-1/3 flex flex-col min-h-48 justify-between h-1/3 max-h-52`}
       key={i}
       data-id={note.id}
     >
@@ -34,8 +34,8 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
             {note.title}{" "}
           </h1>
           <button
-            className={`font-normal border border-black rounded-md text-sm px-2 h-1/2`}
-            onClick={() => handleEdit(note.id)}
+            className={`font-normal border border-black rounded-sm text-sm px-2 h-1/2`}
+            onClick={() => handleEdit()}
           >
             edit
           </button>

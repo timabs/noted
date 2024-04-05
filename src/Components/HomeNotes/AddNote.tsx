@@ -18,21 +18,55 @@ export const AddNote: FC = () => {
     });
   };
 
+  const resetPlaceholders = () => {
+    titleRef.current!.placeholder = "New Note";
+    contentRef.current!.placeholder = "Enter your note text...";
+  };
+
   const handleSubmit = (e: FormEvent, formData: INote | any) => {
     e.preventDefault();
-    saveNote(formData);
-    setNewOpen(false);
-    setFormData({});
+    if (formData) {
+      saveNote(formData);
+      setNewOpen(false);
+      setFormData({});
+    } else {
+      titleRef.current!.placeholder = "Note can't be empty!";
+      contentRef.current!.placeholder = "Note can't be empty!";
+      setTimeout(() => {
+        resetPlaceholders();
+      }, 2000);
+    }
     titleRef.current!.value = "";
     contentRef.current!.value = "";
   };
   return (
-    <div className="w-full flex px-8 h-fit flex-col items-end gap-4">
+    <div className="w-full flex px-8 h-fit flex-col items-end">
       <button
-        className="border-black border-2 py-1 px-4 w-20 rounded-md h-fit text-center"
+        className="py-1 w-16 rounded-md h-fit text-center flex justify-end items-center"
         onClick={() => setNewOpen(!newOpen)}
+        type="button"
       >
-        add
+        <svg
+          version="1.1"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          width="2rem"
+          height="2rem"
+          viewBox="0 0 122.879 122.879"
+          enableBackground="new 0 0 122.879 122.879"
+          xmlSpace="preserve"
+        >
+          <g>
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M104.885,17.995c23.993,23.994,23.993,62.896,0,86.89 c-23.994,23.993-62.896,23.993-86.89,0c-23.993-23.994-23.993-62.896,0-86.89C41.989-5.998,80.891-5.998,104.885,17.995 L104.885,17.995z M93.607,57.949c1.928,0,3.49,1.563,3.49,3.49c0,1.928-1.563,3.49-3.49,3.49H64.93v28.678 c0,1.928-1.563,3.49-3.49,3.49c-1.927,0-3.489-1.563-3.489-3.49V64.93H29.272c-1.928,0-3.491-1.563-3.491-3.49 c0-1.927,1.563-3.49,3.491-3.49H57.95V29.271c0-1.927,1.563-3.49,3.489-3.49c1.928,0,3.49,1.563,3.49,3.49v28.678H93.607 L93.607,57.949z"
+            />
+          </g>
+        </svg>
       </button>
       {/* New note Box */}
       <form
@@ -56,10 +90,12 @@ export const AddNote: FC = () => {
         </label>
         <label htmlFor="content" className="h-4/6">
           <textarea
-            className="h-full overflow-y-auto p-2 resize-none"
+            className="h-full overflow-y-auto p-2 resize-none w-full placeholder:text-sm"
             id="content"
             onChange={handleChange}
             ref={contentRef}
+            placeholder="Enter your note text..."
+            title="note-content"
           ></textarea>
         </label>
         <button

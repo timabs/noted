@@ -2,7 +2,9 @@
 export default {
   content: ["./src/**/*.{html,tsx,ts}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: { helv: ["Helvetica Neue", "sans-serif"] },
+    },
   },
   plugins: [],
 };
