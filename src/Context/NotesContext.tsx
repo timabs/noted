@@ -1,7 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { NoteContextType, INote } from "../@types/note";
+import { fetchNotes } from "../API/notes";
 
-export const NoteContext = createContext<NoteContextType | null>(null);
+export const NoteContext = createContext<NoteContextType>({
+  notes: [],
+  saveNote: () => {},
+  getNotes: () => {},
+});
 
 export const NoteProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -25,8 +30,16 @@ export const NoteProvider: React.FC<{ children: React.ReactNode }> = ({
     };
     setNotes([newNote, ...notes]);
   };
+
+  const getNotes = async () => {
+    const notes = await fetchNotes();
+    setNotes(notes);
+  };
+  useEffect(() => {
+    getNotes();
+  }, []);
   return (
-    <NoteContext.Provider value={{ notes, saveNote }}>
+    <NoteContext.Provider value={{ notes, saveNote, getNotes }}>
       {children}
     </NoteContext.Provider>
   );
