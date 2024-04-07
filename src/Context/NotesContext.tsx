@@ -25,14 +25,14 @@ export const NoteProvider: React.FC<{ children: React.ReactNode }> = ({
       title: note.title,
       content: note.content,
       //change to incorporate db later
-      id: Math.random(),
+      _id: Math.random(),
       date: currentDate.toLocaleString("en-US", dateOptions).replace("at", "-"),
     };
     setNotes([newNote, ...notes]);
   };
 
   const getNotes = async () => {
-    const notes = await fetchNotes();
+    const notes = (await fetchNotes()) as INote[];
     setNotes(notes);
   };
   useEffect(() => {

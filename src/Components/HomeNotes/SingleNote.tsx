@@ -23,7 +23,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
     <div
       className={`font-helv border-2 border-black rounded-md p-2 w-full xl:w-1/3 flex flex-col min-h-48 justify-between h-1/3 max-h-52`}
       key={i}
-      data-id={note.id}
+      data-id={note._id}
     >
       <div>
         <div className="flex flex-row items-center justify-between w-full">
