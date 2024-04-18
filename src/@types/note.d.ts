@@ -1,8 +1,8 @@
 export interface INote {
   title: string;
   content: string;
-  date: string;
-  _id: number;
+  date?: string;
+  _id?: number;
 }
 export type NoteContextType = {
   notes: INote[];
