@@ -1,5 +1,7 @@
-import { FC, useEffect, useRef, useState } from "react";
-import { INote } from "../../@types/note";
+import { FC, useContext, useEffect, useRef, useState } from "react";
+import { INote, NoteContextType } from "../../@types/note";
+import { deleteNote } from "../../API/notes";
+import { NoteContext } from "../../Context/NotesContext";
 
 interface OneNoteProps {
   note: INote;
@@ -8,9 +10,15 @@ interface OneNoteProps {
 
 export const Note: FC<OneNoteProps> = ({ note, i }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
+  const { notes, setNotes } = useContext(NoteContext) as NoteContextType;
   const contentRef = useRef<HTMLParagraphElement>(null);
   const handleEdit = () => {
     setEditMode(!editMode);
+  };
+  const handleDelete = async (id: string) => {
+    await deleteNote(id);
+    const newNotes = notes.filter((note) => note._id != id);
+    setNotes(newNotes);
   };
   useEffect(() => {
     if (editMode && contentRef.current) {
@@ -33,12 +41,20 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
           >
             {note.title}{" "}
           </h1>
-          <button
-            className={`font-normal border border-black rounded-sm text-sm px-2 h-1/2`}
-            onClick={() => handleEdit()}
-          >
-            edit
-          </button>
+          <div className="flex flex-row gap-1">
+            <button
+              className={`font-normal border border-black rounded-sm text-sm px-2 h-1/2`}
+              onClick={() => handleEdit()}
+            >
+              edit
+            </button>
+            <button
+              className={`font-normal border border-black rounded-sm text-sm px-2 h-1/2`}
+              onClick={() => handleDelete(note._id)}
+            >
+              del
+            </button>
+          </div>
         </div>
 
         <p

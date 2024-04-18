@@ -19,10 +19,18 @@ export async function fetchNotes() {
   }
 }
 
-export async function createNote(note: INote) {
+export async function createNote(note: object) {
   try {
     const response = await api.post(`/api/v1/notes`, { note });
     return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function deleteNote(noteId: string) {
+  try {
+    await api.delete(`/api/v1/notes/${noteId}`);
   } catch (error) {
     console.log(error);
   }
