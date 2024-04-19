@@ -29,14 +29,14 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
   }, [editMode]);
   return (
     <div
-      className={`font-helv border-2 border-black rounded-md p-2 w-full xl:w-1/3 flex flex-col min-h-48 justify-between h-1/3 max-h-52`}
+      className={`font-helv border-2 border-black rounded-md p-2 w-full xl:w-1/3 flex flex-col min-h-48 justify-between h-1/3 max-h-56`}
       key={i}
       data-id={note._id}
     >
       <div>
         <div className="flex flex-row items-center justify-between w-full">
           <h1
-            className={`font-bold flex flex-row justify-between p-2`}
+            className={`font-bold flex flex-row justify-between p-2 max-h-12 text-lg truncate max-w-36`}
             contentEditable={editMode}
           >
             {note.title}{" "}
