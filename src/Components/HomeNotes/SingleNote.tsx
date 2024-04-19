@@ -11,15 +11,21 @@ interface OneNoteProps {
 export const Note: FC<OneNoteProps> = ({ note, i }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const { notes, setNotes } = useContext(NoteContext) as NoteContextType;
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLParagraphElement>(null);
   const handleEdit = () => {
-    setEditMode(!editMode);
+    setEditMode(true);
+  };
+  const handleDoneEdit = () => {
+    titleRef.current!.scrollLeft = 0;
+    setEditMode(false);
   };
   const handleDelete = async (id: string) => {
     await deleteNote(id);
     const newNotes = notes.filter((note) => note._id != id);
     setNotes(newNotes);
   };
+
   useEffect(() => {
     if (editMode && contentRef.current) {
       setTimeout(() => {
@@ -38,15 +44,26 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
           <h1
             className={`font-bold flex flex-row justify-between p-2 max-h-12 text-lg truncate max-w-36`}
             contentEditable={editMode}
+            ref={titleRef}
           >
             {note.title}{" "}
           </h1>
           <div className="flex flex-row gap-1">
             <button
-              className={`font-normal border border-black rounded-sm text-sm px-2 h-1/2`}
+              className={`${
+                editMode ? "hidden" : ""
+              } font-normal border border-black rounded-sm text-sm px-2 h-1/2`}
               onClick={() => handleEdit()}
             >
               edit
+            </button>
+            <button
+              className={`${
+                editMode ? "" : "hidden"
+              } font-normal border border-black rounded-sm text-sm px-2 h-1/2`}
+              onClick={() => handleDoneEdit()}
+            >
+              done
             </button>
             <button
               className={`font-normal border border-black rounded-sm text-sm px-2 h-1/2`}
