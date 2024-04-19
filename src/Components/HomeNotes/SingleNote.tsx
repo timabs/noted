@@ -1,6 +1,6 @@
 import { FC, useContext, useEffect, useRef, useState } from "react";
 import { INote, NoteContextType } from "../../@types/note";
-import { deleteNote } from "../../API/notes";
+import { deleteNote, editNote } from "../../API/notes";
 import { NoteContext } from "../../Context/NotesContext";
 
 interface OneNoteProps {
@@ -16,9 +16,15 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
   const handleEdit = () => {
     setEditMode(true);
   };
-  const handleDoneEdit = () => {
+  const handleDoneEdit = async (id: string) => {
+    const editedNote: INote = {
+      title: titleRef.current!.innerText,
+      content: contentRef.current!.innerText,
+      _id: id,
+    };
     titleRef.current!.scrollLeft = 0;
     setEditMode(false);
+    await editNote(editedNote, editedNote._id);
   };
   const handleDelete = async (id: string) => {
     await deleteNote(id);
@@ -61,7 +67,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
               className={`${
                 editMode ? "" : "hidden"
               } font-normal border border-black rounded-sm text-sm px-2 h-1/2`}
-              onClick={() => handleDoneEdit()}
+              onClick={() => handleDoneEdit(note._id)}
             >
               done
             </button>

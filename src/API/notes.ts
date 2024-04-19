@@ -1,5 +1,4 @@
 import axios from "axios";
-import { INote } from "../@types/note";
 
 const apiURL = "http://localhost:5000";
 
@@ -31,6 +30,16 @@ export async function createNote(note: object) {
 export async function deleteNote(noteId: string) {
   try {
     await api.delete(`/api/v1/notes/${noteId}`);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function editNote(note: object, noteId: string) {
+  try {
+    const response = await api.patch(`/api/v1/notes/${noteId}`, { note: note });
+    console.log(response.data);
+    return response.data;
   } catch (error) {
     console.log(error);
   }
