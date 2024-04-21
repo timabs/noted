@@ -10,6 +10,7 @@ interface OneNoteProps {
 
 export const Note: FC<OneNoteProps> = ({ note, i }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const { notes, setNotes } = useContext(NoteContext) as NoteContextType;
   const titleRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLParagraphElement>(null);
@@ -31,7 +32,9 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
     const newNotes = notes.filter((note) => note._id != id);
     setNotes(newNotes);
   };
-
+  const handleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
   useEffect(() => {
     if (editMode && contentRef.current) {
       setTimeout(() => {
@@ -41,7 +44,9 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
   }, [editMode]);
   return (
     <div
-      className={`font-helv border-2 border-black rounded-md p-2 w-full xl:w-1/3 flex flex-col min-h-48 justify-between h-1/3 max-h-56`}
+      className={`${
+        isExpanded ? "h-96" : "h-56"
+      } font-helv border-2 border-black rounded-md p-2 w-full xl:w-1/3 flex flex-col min-h-48 justify-between h-1/3 transition-all duration-300`}
       key={i}
       data-id={note._id}
     >
@@ -81,9 +86,9 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
         </div>
 
         <p
-          className={`${
+          className={`${isExpanded ? "h-72" : "h-32"} ${
             editMode ? "outline-2 outline-black outline-solid" : "outline-none"
-          }break-words overflow-auto flex flex-col max-h-32 text-sm min-h-24 p-2`}
+          }break-words overflow-auto flex flex-col text-sm min-h-24 p-2 transition-all duration-300`}
           contentEditable={editMode}
           ref={contentRef}
           tabIndex={editMode ? 0 : -1}
@@ -91,10 +96,17 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
           {note.content}
         </p>
       </div>
-
-      <span className="text-sm italic self-end justify-self-end">
-        {note.date}
-      </span>
+      <div className="flex flex-row justify-end gap-4 items-center">
+        <span className="text-sm italic self-end justify-self-end">
+          {note.date}
+        </span>
+        <img
+          src="/expand.png"
+          className="w-4 h-4"
+          role="button"
+          onClick={() => handleExpand()}
+        ></img>
+      </div>
     </div>
   );
 };

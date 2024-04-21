@@ -38,7 +38,6 @@ export async function deleteNote(noteId: string) {
 export async function editNote(note: object, noteId: string) {
   try {
     const response = await api.patch(`/api/v1/notes/${noteId}`, { note: note });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);
