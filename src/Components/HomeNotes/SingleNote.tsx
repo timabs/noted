@@ -53,7 +53,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
       <div>
         <div className="flex flex-row items-center justify-between w-full">
           <h1
-            className={`font-bold flex flex-row justify-between p-2 max-h-12 text-lg truncate max-w-36`}
+            className={`font-bold flex flex-row justify-between p-2 max-h-12 text-lg truncate max-w-36 min-w-12`}
             contentEditable={editMode}
             ref={titleRef}
           >
