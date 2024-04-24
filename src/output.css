@@ -677,6 +677,10 @@ video {
   max-width: 9rem;
 }
 
+.max-w-40 {
+  max-width: 10rem;
+}
+
 .resize-none {
   resize: none;
 }
@@ -899,6 +903,18 @@ video {
 
 .hover\:cursor-pointer:hover {
   cursor: pointer;
+}
+
+@media (min-width: 640px) {
+  .sm\:max-w-48 {
+    max-width: 12rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:max-w-48 {
+    max-width: 12rem;
+  }
 }
 
 @media (min-width: 1280px) {
