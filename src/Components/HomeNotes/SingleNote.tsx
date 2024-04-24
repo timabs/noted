@@ -11,9 +11,11 @@ interface OneNoteProps {
 export const Note: FC<OneNoteProps> = ({ note, i }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [contentLength, setContentLength] = useState<number>(0);
   const { notes, setNotes } = useContext(NoteContext) as NoteContextType;
   const titleRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLParagraphElement>(null);
+  const maxNoteLength = 10000;
   const handleEdit = () => {
     setEditMode(true);
   };
@@ -34,6 +36,15 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
   };
   const handleExpand = () => {
     setIsExpanded(!isExpanded);
+  };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLParagraphElement>) => {
+    if (contentLength >= maxNoteLength) {
+      e.preventDefault();
+    }
+  };
+  const handleInput = () => {
+    const noteLength = contentRef.current!.innerText.length;
+    setContentLength(noteLength);
   };
   useEffect(() => {
     if (editMode && contentRef.current) {
@@ -92,6 +103,8 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
           contentEditable={editMode}
           ref={contentRef}
           tabIndex={editMode ? 0 : -1}
+          onInput={() => handleInput()}
+          onKeyDown={(e) => handleKeyDown(e)}
         >
           {note.content}
         </p>
