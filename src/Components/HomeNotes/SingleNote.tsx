@@ -1,6 +1,6 @@
 import { FC, useContext, useEffect, useRef, useState } from "react";
 import { INote, NoteContextType } from "../../@types/note";
-import { deleteNote, editNote } from "../../API/notes";
+import { deleteNote, editNote } from "../../API/NotesAPI";
 import { NoteContext } from "../../Context/NotesContext";
 
 interface OneNoteProps {

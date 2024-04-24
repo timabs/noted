@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { NoteContextType, INote } from "../@types/note";
-import { createNote, fetchNotes } from "../API/notes";
+import { createNote, fetchNotes } from "../API/NotesAPI";
 
 export const NoteContext = createContext<NoteContextType>({
   notes: [],
