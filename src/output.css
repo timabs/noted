@@ -725,6 +725,10 @@ video {
   max-width: 10rem;
 }
 
+.max-w-36 {
+  max-width: 9rem;
+}
+
 .resize-none {
   resize: none;
 }

@@ -78,11 +78,13 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
         </div>
         <div className="flex flex-row items-center justify-between w-full">
           <h1
-            className={`font-bold flex flex-row justify-between p-2 max-h-12 text-lg truncate max-w-40 min-w-12 sm:max-w-48`}
+            className={`font-bold flex flex-row justify-between p-2 max-h-12 text-lg truncate max-w-36 min-w-12 sm:max-w-48`}
             contentEditable={editMode}
             ref={titleRef}
           >
-            {note.title}{" "}
+            <span className={`${editMode ? "" : "truncate"}`}>
+              {note.title}
+            </span>
           </h1>
           <div className="flex flex-row gap-1">
             <button
