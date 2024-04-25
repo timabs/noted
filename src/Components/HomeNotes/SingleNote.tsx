@@ -112,7 +112,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
         <p
           className={`${isExpanded ? "h-72" : "h-32"} ${
             editMode ? "outline-2 outline-black outline-solid" : "outline-none"
-          }break-words overflow-auto flex flex-col text-sm min-h-24 p-2 transition-all duration-300`}
+          } break-words overflow-auto flex flex-col text-sm min-h-24 p-2 transition-all duration-300`}
           contentEditable={editMode}
           ref={contentRef}
           tabIndex={editMode ? 0 : -1}
