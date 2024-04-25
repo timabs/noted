@@ -12,6 +12,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [contentLength, setContentLength] = useState<number>(0);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const { notes, setNotes } = useContext(NoteContext) as NoteContextType;
   const titleRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLParagraphElement>(null);
@@ -39,7 +40,12 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLParagraphElement>) => {
     if (contentLength >= maxNoteLength) {
-      e.preventDefault();
+      setErrorMessage("Max note length reached!");
+      if (e.key != "Backspace") {
+        e.preventDefault();
+      } else {
+        setErrorMessage("");
+      }
     }
   };
   const handleInput = () => {
@@ -61,7 +67,14 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
       key={i}
       data-id={note._id}
     >
-      <div>
+      <div className="relative">
+        <div
+          className={`${
+            errorMessage ? "" : "hidden"
+          } w-full h-12 bg-red-700 text-white absolute transition-all duration-200 text-sm rounded-md text-center flex items-center justify-center -bottom-8`}
+        >
+          <span>{errorMessage}</span>
+        </div>
         <div className="flex flex-row items-center justify-between w-full">
           <h1
             className={`font-bold flex flex-row justify-between p-2 max-h-12 text-lg truncate max-w-40 min-w-12 sm:max-w-48`}
