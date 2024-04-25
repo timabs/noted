@@ -27,6 +27,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
       _id: id,
     };
     titleRef.current!.scrollLeft = 0;
+    contentRef.current!.scrollTop = 0;
     setEditMode(false);
     await editNote(editedNote, editedNote._id);
   };
