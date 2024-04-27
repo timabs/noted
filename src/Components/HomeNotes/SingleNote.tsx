@@ -11,6 +11,7 @@ interface OneNoteProps {
 export const Note: FC<OneNoteProps> = ({ note, i }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [optionsOpen, setOptionsOpen] = useState<boolean>(false);
   const [contentLength, setContentLength] = useState<number>(0);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const { notes, setNotes } = useContext(NoteContext) as NoteContextType;
@@ -87,7 +88,21 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
             </span>
           </h1>
           <div className="flex flex-row gap-1">
-            <button
+            <img
+              src="/ellipsis.png"
+              role="button"
+              aria-hidden="true"
+              className="h-4 pr-2"
+              onClick={() => setOptionsOpen(!optionsOpen)}
+            ></img>
+            <div
+              className={`${
+                optionsOpen
+                  ? "w-1/2 h-2/3 border-2 top-8"
+                  : "w-0 h-0 top-8 border-2 border-transparent"
+              } absolute border-black right-2 rounded-md transition-all duration-200 z-20`}
+            ></div>
+            {/* <button
               className={`${
                 editMode ? "hidden" : ""
               } font-normal border border-black rounded-sm text-sm px-2 h-1/2`}
@@ -108,7 +123,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
               onClick={() => handleDelete(note._id)}
             >
               del
-            </button>
+            </button> */}
           </div>
         </div>
 
@@ -135,6 +150,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
           role="button"
           onClick={() => handleExpand()}
         ></img>
+        <div></div>
       </div>
     </div>
   );
