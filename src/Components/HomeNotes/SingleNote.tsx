@@ -2,6 +2,7 @@ import { FC, useContext, useEffect, useRef, useState } from "react";
 import { INote, NoteContextType } from "../../@types/note";
 import { deleteNote, editNote } from "../../API/NotesAPI";
 import { NoteContext } from "../../Context/NotesContext";
+import { OptionsBtn } from "./OptionsBtn";
 
 interface OneNoteProps {
   note: INote;
@@ -102,14 +103,12 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
                   : "w-0 h-0 top-9 border-2 border-transparent"
               } flex flex-col absolute border-black right-2 rounded-md transition-all duration-200 z-20`}
             >
-              <button
-                className={`${editMode ? "hidden" : ""} ${
-                  optionsOpen ? "h-fit border-b-2 border-black" : "h-0 border-0"
-                } font-normal rounded-sm text-sm px-2 h-1/2  transition-all duration-250 p-2`}
-                onClick={() => handleEdit()}
-              >
-                {optionsOpen ? "edit" : ""}
-              </button>
+              <OptionsBtn
+                buttonText="edit"
+                optionsOpen={optionsOpen}
+                onClickFunc={handleEdit}
+                noteId={note._id}
+              />
               {/* <button
                 className={`${editMode ? "" : "hidden"} ${
                   optionsOpen ? "" : "hidden"
@@ -118,14 +117,12 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
               >
                 done
               </button> */}
-              <button
-                className={`font-normal rounded-sm text-sm p-2 ${
-                  optionsOpen ? "h-fit border-b-2 border-black" : "h-0 border-0"
-                }`}
-                onClick={() => handleDelete(note._id)}
-              >
-                {optionsOpen ? "del" : ""}
-              </button>
+              <OptionsBtn
+                buttonText="del"
+                optionsOpen={optionsOpen}
+                onClickFunc={handleDelete}
+                noteId={note._id}
+              />
             </div>
           </div>
         </div>
