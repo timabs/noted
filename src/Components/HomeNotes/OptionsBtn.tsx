@@ -19,9 +19,9 @@ export const OptionsBtn: FC<OptionsProps> = ({
 }) => {
   return (
     <button
-      className={`font-normal rounded-sm text-sm p-2 ${
-        optionsOpen ? "h-fit border-b-2 border-black" : "h-0 border-0"
-      }`}
+      className={`font-normal rounded-md text-sm p-2 ${
+        optionsOpen ? "h-fit border-black border-b-2" : "h-0 border-0"
+      } bg-white`}
       onClick={() => onClickFunc(noteId)}
     >
       {optionsOpen ? buttonText : ""}

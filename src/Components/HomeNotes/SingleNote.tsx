@@ -55,6 +55,9 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
     const noteLength = contentRef.current!.innerText.length;
     setContentLength(noteLength);
   };
+  const handleAdd = () => {
+    console.log("bing bong");
+  };
   useEffect(() => {
     if (editMode && contentRef.current) {
       setTimeout(() => {
@@ -109,18 +112,16 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
                 onClickFunc={handleEdit}
                 noteId={note._id}
               />
-              {/* <button
-                className={`${editMode ? "" : "hidden"} ${
-                  optionsOpen ? "" : "hidden"
-                } font-normal borderrounded-sm text-sm px-2 h-1/2`}
-                onClick={() => handleDoneEdit(note._id)}
-              >
-                done
-              </button> */}
               <OptionsBtn
                 buttonText="del"
                 optionsOpen={optionsOpen}
                 onClickFunc={handleDelete}
+                noteId={note._id}
+              />
+              <OptionsBtn
+                buttonText="add to ntbk"
+                optionsOpen={optionsOpen}
+                onClickFunc={handleAdd}
                 noteId={note._id}
               />
             </div>
