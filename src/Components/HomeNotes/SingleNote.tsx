@@ -98,32 +98,35 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
             <div
               className={`${
                 optionsOpen
-                  ? "w-1/2 h-2/3 border-2 top-8"
-                  : "w-0 h-0 top-8 border-2 border-transparent"
-              } absolute border-black right-2 rounded-md transition-all duration-200 z-20`}
-            ></div>
-            {/* <button
-              className={`${
-                editMode ? "hidden" : ""
-              } font-normal border border-black rounded-sm text-sm px-2 h-1/2`}
-              onClick={() => handleEdit()}
+                  ? "w-1/2 h-2/3 border-2 top-9"
+                  : "w-0 h-0 top-9 border-2 border-transparent"
+              } flex flex-col absolute border-black right-2 rounded-md transition-all duration-200 z-20`}
             >
-              edit
-            </button>
-            <button
-              className={`${
-                editMode ? "" : "hidden"
-              } font-normal border border-black rounded-sm text-sm px-2 h-1/2`}
-              onClick={() => handleDoneEdit(note._id)}
-            >
-              done
-            </button>
-            <button
-              className={`font-normal border border-black rounded-sm text-sm px-2 h-1/2`}
-              onClick={() => handleDelete(note._id)}
-            >
-              del
-            </button> */}
+              <button
+                className={`${editMode ? "hidden" : ""} ${
+                  optionsOpen ? "h-fit border-b-2 border-black" : "h-0 border-0"
+                } font-normal rounded-sm text-sm px-2 h-1/2  transition-all duration-250 p-2`}
+                onClick={() => handleEdit()}
+              >
+                {optionsOpen ? "edit" : ""}
+              </button>
+              {/* <button
+                className={`${editMode ? "" : "hidden"} ${
+                  optionsOpen ? "" : "hidden"
+                } font-normal borderrounded-sm text-sm px-2 h-1/2`}
+                onClick={() => handleDoneEdit(note._id)}
+              >
+                done
+              </button> */}
+              <button
+                className={`font-normal rounded-sm text-sm p-2 ${
+                  optionsOpen ? "h-fit border-b-2 border-black" : "h-0 border-0"
+                }`}
+                onClick={() => handleDelete(note._id)}
+              >
+                {optionsOpen ? "del" : ""}
+              </button>
+            </div>
           </div>
         </div>
 

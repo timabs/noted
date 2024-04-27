@@ -572,6 +572,18 @@ video {
   top: 2rem;
 }
 
+.top-10 {
+  top: 2.5rem;
+}
+
+.top-12 {
+  top: 3rem;
+}
+
+.top-9 {
+  top: 2.25rem;
+}
+
 .z-20 {
   z-index: 20;
 }
@@ -801,6 +813,10 @@ video {
 
 .border-2 {
   border-width: 2px;
+}
+
+.border-0 {
+  border-width: 0px;
 }
 
 .border-b-2 {
