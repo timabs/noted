@@ -9,7 +9,7 @@ export default function BurgerMenu() {
   };
   return (
     <div
-      className="w-8 flex flex-col gap-1 hover:cursor-pointer z-20 ml-6 mt-8 absolute xl:ml-8"
+      className="w-8 flex flex-col gap-1 hover:cursor-pointer z-30 ml-6 mt-8 absolute xl:ml-8"
       onClick={() => handleClick()}
     >
       {/* lines */}

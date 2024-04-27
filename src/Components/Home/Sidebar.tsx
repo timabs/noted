@@ -7,7 +7,7 @@ const Sidebar = () => {
     <div
       className={`h-screen absolute bg-gray-100 w-5/6 transition-all duration-300  ${
         sbOpen ? "left-0" : "-left-full"
-      } xl:w-1/4`}
+      } xl:w-1/4 z-20`}
     ></div>
   );
 };
