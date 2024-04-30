@@ -10,19 +10,22 @@ interface OptionsProps {
   optionsOpen: boolean;
   onClickFunc: (id: string) => void;
   noteId: string;
+  style?: Object;
 }
 export const OptionsBtn: FC<OptionsProps> = ({
   buttonText,
   optionsOpen,
   onClickFunc,
   noteId,
+  style,
 }) => {
   return (
     <button
-      className={`font-normal rounded-md text-sm p-2 ${
+      className={`font-normal rounded-t-md text-sm p-2 ${
         optionsOpen ? "h-fit border-black border-b-2" : "h-0 border-0"
-      } bg-white`}
+      } bg-white z-10`}
       onClick={() => onClickFunc(noteId)}
+      style={style}
     >
       {optionsOpen ? buttonText : ""}
     </button>

@@ -20,6 +20,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
   const contentRef = useRef<HTMLParagraphElement>(null);
   const maxNoteLength = 10000;
   const handleEdit = () => {
+    setOptionsOpen(false);
     setEditMode(true);
   };
   const handleDoneEdit = async (id: string) => {
@@ -91,19 +92,30 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
               {note.title}
             </span>
           </h1>
-          <div className="flex flex-row gap-1">
+          <div className="flex flex-row gap-4 items-center">
+            <button
+              className={`${
+                editMode ? "" : "hidden"
+              } border rounded-md border-black text-sm px-2 py-1`}
+              onClick={() => handleDoneEdit(note._id)}
+            >
+              done
+            </button>
             <img
               src="/ellipsis.png"
               role="button"
               aria-hidden="true"
               className="h-4 pr-2"
-              onClick={() => setOptionsOpen(!optionsOpen)}
+              onClick={() => {
+                setEditMode(false);
+                setOptionsOpen(!optionsOpen);
+              }}
             ></img>
             <div
               className={`${
                 optionsOpen
                   ? "w-1/2 h-2/3 border-2 top-9"
-                  : "w-0 h-0 top-9 border-2 border-transparent"
+                  : "w-0 h-0 top-9 border-2 border-transparent hidden"
               } flex flex-col absolute border-black right-2 rounded-md transition-all duration-200 z-20`}
             >
               <OptionsBtn
@@ -123,6 +135,10 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
                 optionsOpen={optionsOpen}
                 onClickFunc={handleAdd}
                 noteId={note._id}
+                style={{
+                  borderBottomLeftRadius: "0.375rem",
+                  borderBottomRightRadius: "0.375rem",
+                }}
               />
             </div>
           </div>
