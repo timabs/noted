@@ -17,3 +17,14 @@ export async function getNotebooks() {
     console.log(error);
   }
 }
+
+export async function addNoteToNotebook(noteId: string, notebookId: string) {
+  try {
+    const response = await api.patch(`/api/v1/notebooks/${notebookId}`, {
+      noteId: noteId,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
