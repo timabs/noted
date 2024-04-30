@@ -3,7 +3,6 @@ import { INote, NoteContextType } from "../../@types/note";
 import { deleteNote, editNote } from "../../API/NotesAPI";
 import { NoteContext } from "../../Context/NotesContext";
 import { OptionsBtn } from "./OptionsBtn";
-import Modal from "./Modal";
 import AddNotebookModal from "./Modal";
 
 interface OneNoteProps {
@@ -150,6 +149,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
               <AddNotebookModal
                 isOpen={addModalOpen}
                 onClose={handleModalClose}
+                noteId={note._id}
               >
                 <p>Notebook 1</p>
                 <p>Notebook 2</p>
