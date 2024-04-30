@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { addNoteToNotebook, getNotebooks } from "../../API/NotebooksAPI";
 
 interface ModalProps {
-  isOpen: boolean;
+  addModalOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
   noteId: string;
 }
 
@@ -16,9 +15,8 @@ interface Notebook {
 }
 
 const AddNotebookModal: React.FC<ModalProps> = ({
-  isOpen,
+  addModalOpen,
   onClose,
-  children,
   noteId,
 }) => {
   const [notebooks, setNotebooks] = useState<Notebook[]>([]);
@@ -31,22 +29,29 @@ const AddNotebookModal: React.FC<ModalProps> = ({
     fetchNotebooks();
   }, []);
 
+  useEffect(() => {
+    console.log(`Add Modal Open: ${addModalOpen}`);
+  }, [addModalOpen]);
   const selectNotebook = (notebookId: string) => {
-    setTentativeNotebookId(notebookId);
+    if (notebookId === tentativeNotebookId) {
+      setTentativeNotebookId("");
+    } else {
+      setTentativeNotebookId(notebookId);
+    }
   };
 
   const addNote = async (noteId: string, notebookId: string) => {
     console.log(noteId, notebookId);
-
-    const response = await addNoteToNotebook(noteId, notebookId);
+    await addNoteToNotebook(noteId, notebookId);
     onClose();
-    console.log(response);
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+    <div
+      className={`${
+        addModalOpen ? "" : "hidden"
+      } fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50`}
+    >
       <div className="relative top-20 mx-auto border w-96 shadow-lg rounded-md bg-white">
         <div className="flex justify-between items-center">
           <h4 className="text-lg font-medium text-gray-900 p-4 italic">
@@ -75,7 +80,11 @@ const AddNotebookModal: React.FC<ModalProps> = ({
           {notebooks.map((notebook, index) => (
             <span
               key={index}
-              className={`bg-gray-200 w-full p-2 pl-4 flex`}
+              className={`${
+                tentativeNotebookId === notebook._id
+                  ? "border-y-2 border-black"
+                  : ""
+              } bg-gray-100 w-full p-2 pl-4 flex`}
               onClick={() => selectNotebook(notebook._id)}
             >
               {notebook.title}

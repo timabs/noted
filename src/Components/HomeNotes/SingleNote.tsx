@@ -21,6 +21,14 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLParagraphElement>(null);
   const maxNoteLength = 10000;
+  //options handling
+  useEffect(() => {
+    console.log(`Options Menu Open: ${optionsOpen}`);
+  }, [optionsOpen]);
+  const handleMenu = () => {
+    setOptionsOpen(!optionsOpen);
+    setEditMode(false);
+  };
   const handleEdit = () => {
     setOptionsOpen(false);
     setEditMode(true);
@@ -41,6 +49,15 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
     const newNotes = notes.filter((note) => note._id != id);
     setNotes(newNotes);
   };
+  const handleAdd = async () => {
+    setAddModalOpen(true);
+    setOptionsOpen(false);
+  };
+  const handleModalClose = () => {
+    setAddModalOpen(false);
+  };
+
+  //within note handling
   const handleExpand = () => {
     setIsExpanded(!isExpanded);
   };
@@ -58,12 +75,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
     const noteLength = contentRef.current!.innerText.length;
     setContentLength(noteLength);
   };
-  const handleAdd = () => {
-    setAddModalOpen(!addModalOpen);
-  };
-  const handleModalClose = () => {
-    setAddModalOpen(false);
-  };
+
   useEffect(() => {
     if (editMode && contentRef.current) {
       setTimeout(() => {
@@ -111,10 +123,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
               role="button"
               aria-hidden="true"
               className="h-4 pr-2"
-              onClick={() => {
-                setEditMode(false);
-                setOptionsOpen(!optionsOpen);
-              }}
+              onClick={() => handleMenu()}
             ></img>
             <div
               className={`${
@@ -135,7 +144,15 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
                 onClickFunc={handleDelete}
                 noteId={note._id}
               />
-              <OptionsBtn
+              <button
+                className={`font-normal rounded-t-md text-sm p-2 ${
+                  optionsOpen ? "h-fit border-black border-b-2" : "hidden"
+                } bg-white z-10 border-b-0 rounded-b-md`}
+                onClick={() => handleAdd()}
+              >
+                {optionsOpen ? "add to ntbk" : ""}
+              </button>
+              {/* <OptionsBtn
                 buttonText="add to ntbk"
                 optionsOpen={optionsOpen}
                 onClickFunc={handleAdd}
@@ -145,16 +162,13 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
                   borderBottomRightRadius: "0.375rem",
                   borderBottom: "0",
                 }}
-              />
-              <AddNotebookModal
-                isOpen={addModalOpen}
-                onClose={handleModalClose}
-                noteId={note._id}
-              >
-                <p>Notebook 1</p>
-                <p>Notebook 2</p>
-              </AddNotebookModal>
+              /> */}
             </div>
+            <AddNotebookModal
+              addModalOpen={addModalOpen}
+              onClose={handleModalClose}
+              noteId={note._id}
+            />
           </div>
         </div>
 
