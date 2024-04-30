@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { addNoteToNotebook, getNotebooks } from "../../API/NotebooksAPI";
-import { Notebook } from "../../@types/note";
+import React, { useContext, useState } from "react";
+import { addNoteToNotebook } from "../../API/NotebooksAPI";
+import { NotebookContextType } from "../../@types/note";
+import { NotebooksContext } from "../../Context/NotebooksContext";
 
 interface ModalProps {
   addModalOpen: boolean;
@@ -13,19 +14,9 @@ const AddNotebookModal: React.FC<ModalProps> = ({
   onClose,
   noteId,
 }) => {
-  const [notebooks, setNotebooks] = useState<Notebook[]>([]);
+  const { notebooks } = useContext(NotebooksContext) as NotebookContextType;
   const [tentativeNotebookId, setTentativeNotebookId] = useState<string>();
-  useEffect(() => {
-    async function fetchNotebooks() {
-      const allNotebooks = await getNotebooks();
-      setNotebooks(allNotebooks);
-    }
-    fetchNotebooks();
-  }, []);
 
-  useEffect(() => {
-    console.log(`Add Modal Open: ${addModalOpen}`);
-  }, [addModalOpen]);
   const selectNotebook = (notebookId: string) => {
     if (notebookId === tentativeNotebookId) {
       setTentativeNotebookId("");
@@ -52,7 +43,10 @@ const AddNotebookModal: React.FC<ModalProps> = ({
             all notebooks
           </h4>
           <button
-            onClick={onClose}
+            onClick={() => {
+              onClose();
+              setTentativeNotebookId("");
+            }}
             className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-2 pr-4 ml-auto inline-flex items-center"
           >
             <svg

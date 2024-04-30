@@ -22,9 +22,6 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
   const contentRef = useRef<HTMLParagraphElement>(null);
   const maxNoteLength = 10000;
   //options handling
-  useEffect(() => {
-    console.log(`Options Menu Open: ${optionsOpen}`);
-  }, [optionsOpen]);
   const handleMenu = () => {
     setOptionsOpen(!optionsOpen);
     setEditMode(false);
