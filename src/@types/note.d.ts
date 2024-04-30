@@ -10,3 +10,15 @@ export type NoteContextType = {
   getNotes: () => void;
   setNotes: React.Dispatch<React.SetStateAction<INote[]>>;
 };
+
+export interface Notebook {
+  _id: string;
+  user: string;
+  title: string;
+  notes: string[];
+}
+
+export type NotebookContextType = {
+  notebooks: Notebook[];
+  setNotebooks: React.Dispatch<SetStateAction<Notebook[]>>;
+};

@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { addNoteToNotebook, getNotebooks } from "../../API/NotebooksAPI";
+import { Notebook } from "../../@types/note";
 
 interface ModalProps {
   addModalOpen: boolean;
   onClose: () => void;
   noteId: string;
-}
-
-interface Notebook {
-  _id: string;
-  user: string;
-  title: string;
-  notes: string[];
 }
 
 const AddNotebookModal: React.FC<ModalProps> = ({
