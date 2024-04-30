@@ -3,6 +3,8 @@ import { INote, NoteContextType } from "../../@types/note";
 import { deleteNote, editNote } from "../../API/NotesAPI";
 import { NoteContext } from "../../Context/NotesContext";
 import { OptionsBtn } from "./OptionsBtn";
+import Modal from "./Modal";
+import AddNotebookModal from "./Modal";
 
 interface OneNoteProps {
   note: INote;
@@ -13,6 +15,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [optionsOpen, setOptionsOpen] = useState<boolean>(false);
+  const [addModalOpen, setAddModalOpen] = useState<boolean>(false);
   const [contentLength, setContentLength] = useState<number>(0);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const { notes, setNotes } = useContext(NoteContext) as NoteContextType;
@@ -57,7 +60,10 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
     setContentLength(noteLength);
   };
   const handleAdd = () => {
-    console.log("bing bong");
+    setAddModalOpen(!addModalOpen);
+  };
+  const handleModalClose = () => {
+    setAddModalOpen(false);
   };
   useEffect(() => {
     if (editMode && contentRef.current) {
@@ -114,7 +120,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
             <div
               className={`${
                 optionsOpen
-                  ? "w-1/2 h-2/3 border-2 top-9"
+                  ? "w-1/2 h-fit border-2 top-9"
                   : "w-0 h-0 top-9 border-2 border-transparent hidden"
               } flex flex-col absolute border-black right-2 rounded-md transition-all duration-200 z-20`}
             >
@@ -138,8 +144,16 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
                 style={{
                   borderBottomLeftRadius: "0.375rem",
                   borderBottomRightRadius: "0.375rem",
+                  borderBottom: "0",
                 }}
               />
+              <AddNotebookModal
+                isOpen={addModalOpen}
+                onClose={handleModalClose}
+              >
+                <p>Notebook 1</p>
+                <p>Notebook 2</p>
+              </AddNotebookModal>
             </div>
           </div>
         </div>
