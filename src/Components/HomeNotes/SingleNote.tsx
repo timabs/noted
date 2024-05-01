@@ -141,15 +141,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
                 onClickFunc={handleDelete}
                 noteId={note._id}
               />
-              <button
-                className={`font-normal rounded-t-md text-sm p-2 ${
-                  optionsOpen ? "h-fit border-black border-b-2" : "hidden"
-                } bg-white z-10 border-b-0 rounded-b-md`}
-                onClick={() => handleAdd()}
-              >
-                {optionsOpen ? "add to ntbk" : ""}
-              </button>
-              {/* <OptionsBtn
+              <OptionsBtn
                 buttonText="add to ntbk"
                 optionsOpen={optionsOpen}
                 onClickFunc={handleAdd}
@@ -159,7 +151,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
                   borderBottomRightRadius: "0.375rem",
                   borderBottom: "0",
                 }}
-              /> */}
+              />
             </div>
             <AddNotebookModal
               addModalOpen={addModalOpen}
