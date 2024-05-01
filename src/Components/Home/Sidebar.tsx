@@ -17,7 +17,9 @@ const Sidebar = () => {
         <div className="flex flex-col gap-2">
           {notebooks.map((notebook, index) => (
             <span
-              className="flex w-full text-xl bg-white pl-6 py-2"
+              className={`${
+                index === notebooks.length - 1 ? "" : "border-b-2"
+              } flex w-full text-xl bg-white pl-6 py-2`}
               key={index}
             >
               {notebook.title}

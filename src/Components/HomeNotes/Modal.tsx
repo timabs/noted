@@ -72,6 +72,8 @@ const AddNotebookModal: React.FC<ModalProps> = ({
                 tentativeNotebookId === notebook._id
                   ? "border-y-2 border-black"
                   : ""
+              } ${
+                index === notebooks.length - 1 ? "" : "border-b-2"
               } bg-gray-100 w-full p-2 pl-4 flex`}
               onClick={() => selectNotebook(notebook._id)}
             >
