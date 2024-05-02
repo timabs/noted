@@ -127,7 +127,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
                 optionsOpen
                   ? "w-1/2 h-fit border-2 top-9"
                   : "w-0 h-0 top-9 border-2 border-transparent hidden"
-              } flex flex-col absolute border-black right-2 rounded-md transition-all duration-200 z-20`}
+              } flex flex-col absolute border-black right-2 rounded-md transition-all duration-200 z-10`}
             >
               <OptionsBtn
                 buttonText="edit"
