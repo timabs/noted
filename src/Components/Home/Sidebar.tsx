@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { SidebarContext } from "../../Context/SidebarContext";
 import { NotebooksContext } from "../../Context/NotebooksContext";
 import { NotebookContextType } from "../../@types/note";
+import { SbNotebooks } from "./SbNotebooks";
 
 const Sidebar = () => {
   const { sbOpen } = useContext(SidebarContext);
@@ -16,14 +17,7 @@ const Sidebar = () => {
         <h2 className="text-4xl font-bold ml-6">Notebooks</h2>
         <div className="flex flex-col gap-2">
           {notebooks.map((notebook, index) => (
-            <span
-              className={`${
-                index === notebooks.length - 1 ? "" : "border-b-2"
-              } flex w-full text-xl bg-white pl-6 py-2`}
-              key={index}
-            >
-              {notebook.title}
-            </span>
+            <SbNotebooks notebook={notebook} index={index}></SbNotebooks>
           ))}
         </div>
       </div>
