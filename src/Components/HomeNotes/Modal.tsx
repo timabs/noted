@@ -26,7 +26,6 @@ const AddNotebookModal: React.FC<ModalProps> = ({
   };
 
   const addNote = async (noteId: string, notebookId: string) => {
-    console.log(noteId, notebookId);
     await addNoteToNotebook(noteId, notebookId);
     onClose();
   };

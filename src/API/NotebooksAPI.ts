@@ -28,3 +28,12 @@ export async function addNoteToNotebook(noteId: string, notebookId: string) {
     console.log(error);
   }
 }
+
+export async function getNotesInNotebook(notebookId: string) {
+  try {
+    const response = await api.get(`api/v1/notebooks/${notebookId}`);
+    return response.data.fullNotes;
+  } catch (error) {
+    console.log(error);
+  }
+}
