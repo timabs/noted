@@ -84,7 +84,7 @@ export const Note: FC<OneNoteProps> = ({ note, i }) => {
     <div
       className={`${
         isExpanded ? "h-96" : "h-56"
-      } font-helv border-2 border-black rounded-md p-2 w-full xl:w-1/3 flex flex-col min-h-48 justify-between h-1/3 transition-all duration-300`}
+      } font-roboto border-2 border-black rounded-md p-2 w-full xl:w-1/3 flex flex-col min-h-48 justify-between h-1/3 transition-all duration-300`}
       key={i}
       data-id={note._id}
     >

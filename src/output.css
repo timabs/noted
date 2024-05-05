@@ -983,6 +983,14 @@ video {
   font-family: Helvetica Neue, sans-serif;
 }
 
+.font-inter {
+  font-family: Inter, sans-serif;
+}
+
+.font-roboto {
+  font-family: Roboto, sans-serif;
+}
+
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
@@ -1042,10 +1050,6 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.underline {
-  text-decoration-line: underline;
 }
 
 .shadow-lg {

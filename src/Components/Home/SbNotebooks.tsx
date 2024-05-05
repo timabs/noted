@@ -34,8 +34,12 @@ export const SbNotebooks: FC<SbNotebookProps> = ({ notebook, index }) => {
       >
         {notebook.title}
       </span>
-      {fullNotes?.map((fullNote: INote) => (
-        <span className={`text-sm w-full flex pl-6 font-bold underline`}>
+      {fullNotes?.map((fullNote: INote, index) => (
+        <span
+          className={`text-sm w-full flex pl-6 ${
+            index === fullNotes.length - 1 ? "" : "border-b-2"
+          }`}
+        >
           {fullNote.title}
         </span>
       ))}
